@@ -22,7 +22,7 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
     var sectionInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
     
     var itemsPerColumn: CGFloat {
-        return collectionHeight / (maximumItemSize.height + minimumInterItemSpacing)
+        return (collectionHeight - (sectionInsets.top + sectionInsets.bottom)) / (maximumItemSize.height + minimumInterItemSpacing)
     }
     
     // =========================================================================
@@ -67,9 +67,13 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
     }
     
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
-        return true
+        if let originalBounds = collectionView?.bounds {
+            return originalBounds == newBounds
+        }
+        
+        return false
     }
-   
+    
     override func prepareLayout() {
         let numberOfSections = collectionView?.numberOfSections()
         
@@ -85,10 +89,9 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
                 let itemStartX = floor(CGFloat(item) / itemsPerColumn) * (maximumItemSize.width + minimumInterItemSpacing) + sectionInsets.left
                 let itemStartY = floor(CGFloat(item) % itemsPerColumn) * (maximumItemSize.height + minimumInterItemSpacing) + sectionInsets.top
                 
-                println("\(floor(CGFloat(item) % itemsPerColumn))")
-                
-                itemAttribute.frame = CGRect(x: itemStartX, y: itemStartY, width: maximumItemSize.width, height: maximumItemSize.height)
+                itemAttribute.frame = CGRect(origin: CGPoint(x: itemStartX, y: itemStartY), size: randomItemSize())
                 itemAttribute.zIndex = 1000
+                itemAttribute.transform = CGAffineTransformMakeRotation(randomAngle())
                 
                 
                 // Create Decoration Attributes
@@ -116,6 +119,26 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
         
         return CGSize(width: ceil(CGFloat(itemAttributes.count) / itemsPerColumn) * fullItemWidth + sectionInsetsAdjustment, height: collectionHeight)
     }
+    
+    // =========================================================================
+    // MARK: - Convenience
+    // =========================================================================
+    
+    func randomAngle() -> CGFloat {
+        let multiplier = (arc4random() % 2) == 0 ? CGFloat(-1.0) : CGFloat(1.0)
+        let angle = CGFloat(arc4random_uniform(30)) / 360.0
+        return multiplier * angle
+    }
+    
+    func randomItemSize() -> CGSize {
+        let width = minimumItemSize.width + CGFloat(arc4random_uniform(UInt32(maximumItemSize.width - minimumItemSize.width)))
+        //        let height = minimumItemSize.height + CGFloat(arc4random_uniform(UInt32(maximumItemSize.height - minimumItemSize.height)))
+        let height = maximumItemSize.height * (width / maximumItemSize.width)
+        
+        return CGSize(width: width, height: height)
+    }
+    
+
 }
 
 
