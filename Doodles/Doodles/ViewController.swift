@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellIdentifier)
+        collectionView.registerClass(DoodleCollectionViewCell.self, forCellWithReuseIdentifier: self.cellIdentifier)
         
         return collectionView
     }()
@@ -54,9 +54,7 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
-        
-        cell.backgroundColor = UIColor.redColor()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! DoodleCollectionViewCell
         
         return cell
     }
