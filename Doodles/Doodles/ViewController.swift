@@ -28,6 +28,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         super.init(nibName: nil, bundle: nil)
     }
+    
+    var data: [Doodle] = []
 
     required init(coder aDecoder: NSCoder) {
         doodleButton = UIButton()
@@ -59,6 +61,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[collection]|", options: nil, metrics: nil, views: views))
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[collection]|", options: nil, metrics: nil, views: views))
+        
+        data = Doodle.allDoodles()
+        collectionView.reloadData()
     }
     
     func setupViews()
@@ -166,11 +171,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
 extension ViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return data.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! DoodleCollectionViewCell
+        
+        let doodle = data[indexPath.row]
+        
+        let imageData = doodle.image
+        let image = UIImage(data: imageData)!
+        
+        cell.doodleImageView.image = image
         
         return cell
     }
