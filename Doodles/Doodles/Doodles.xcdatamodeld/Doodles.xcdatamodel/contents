@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Artist" representedClassName="PRODUCT_MODULE_NAME.Artist" syncable="YES">
+    <entity name="Artist" representedClassName="Doodles.Artist" syncable="YES">
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="doodles" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Doodle" inverseName="artist" inverseEntity="Doodle" syncable="YES"/>
+        <relationship name="doodles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Doodle" inverseName="artist" inverseEntity="Doodle" syncable="YES"/>
     </entity>
-    <entity name="Doodle" representedClassName="PRODUCT_MODULE_NAME.Doodle" syncable="YES">
+    <entity name="Doodle" representedClassName="Doodles.Doodle" syncable="YES">
         <attribute name="doodleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="likes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="doodles" inverseEntity="Artist" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Doodle" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Artist" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Doodle" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

@@ -14,6 +14,6 @@ class Doodle: NSManagedObject {
     @NSManaged var doodleName: String
     @NSManaged var image: NSData
     @NSManaged var likes: NSNumber
-    @NSManaged var artist: NSManagedObject
+    @NSManaged var artist: Artist
 
 }

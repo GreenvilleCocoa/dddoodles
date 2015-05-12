@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
+let artistEntityName = "Artist"
+
 extension Artist {
     
-    static let entityName = "Artist"
-    
     class func newArtist() -> Artist {
-        return NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: CoreDataStack.sharedInstance.managedObjectContext!) as! Artist
+        return NSEntityDescription.insertNewObjectForEntityForName(artistEntityName, inManagedObjectContext: CoreDataStack.sharedInstance.managedObjectContext!) as! Artist
     }
     
-    class func artistWith(firstName: String, lastName: String) -> Artist? {
-        let fetchRequest = NSFetchRequest(entityName: entityName);
+    class func artistWith(firstName: String, lastName: String) -> Artist {
+        let fetchRequest = NSFetchRequest(entityName: artistEntityName);
         
         let predicate = NSPredicate(format: "firstName == %@ AND lastName == %@", firstName, lastName)
         fetchRequest.predicate = predicate
@@ -32,5 +32,18 @@ extension Artist {
         newArtist.lastName = lastName
         
         return newArtist
+    }
+    
+    class func allArtists() -> [Artist] {
+        let fetchRequest = NSFetchRequest(entityName: artistEntityName)
+        
+        let predicate = NSPredicate(format: "TRUEPREDICATE")
+        fetchRequest.predicate = predicate
+        
+        let firstNameDescriptor = NSSortDescriptor(key: "firstName", ascending: true)
+        let lastNameDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
+        fetchRequest.sortDescriptors = [firstNameDescriptor, lastNameDescriptor]
+        
+        return CoreDataStack.sharedInstance.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Artist] ?? []
     }
 }

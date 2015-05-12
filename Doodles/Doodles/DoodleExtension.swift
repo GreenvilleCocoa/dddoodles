@@ -9,18 +9,30 @@
 import Foundation
 import CoreData
 
+let doodleEntityName = "Doodle"
+
 extension Doodle {
     
-    static let entityName = "Doodle"
-    
     class func newDoodle() -> Doodle {
-        return NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: CoreDataStack.sharedInstance.managedObjectContext!) as! Doodle
+        return NSEntityDescription.insertNewObjectForEntityForName(doodleEntityName, inManagedObjectContext: CoreDataStack.sharedInstance.managedObjectContext!) as! Doodle
     }
     
-    class func doodlesMatchingString(searchString: String) -> [Doodle] {
-        let fetchRequest = NSFetchRequest(entityName: entityName);
+    class func doodlesMatching(string: String) -> [Doodle] {
+        let fetchRequest = NSFetchRequest(entityName: doodleEntityName);
         
-        let predicate = NSPredicate(format: "doodleName CONTAINS[cd] %@ OR artist.firstName CONTAINS[cd] %@ OR artist.lastName CONTAINS[cd] %@", searchString, searchString, searchString)
+        let predicate = NSPredicate(format: "doodleName CONTAINS[cd] %@ OR artist.firstName CONTAINS[cd] %@ OR artist.lastName CONTAINS[cd] %@", string, string, string)
+        fetchRequest.predicate = predicate
+        
+        let searchDescriptor = NSSortDescriptor(key: "doodleName", ascending: true)
+        fetchRequest.sortDescriptors = [searchDescriptor]
+        
+        return CoreDataStack.sharedInstance.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Doodle] ?? []
+    }
+    
+    class func allDoodles() -> [Doodle] {
+        let fetchRequest = NSFetchRequest(entityName: doodleEntityName)
+        
+        let predicate = NSPredicate(format: "TRUEPREDICATE")
         fetchRequest.predicate = predicate
         
         let searchDescriptor = NSSortDescriptor(key: "doodleName", ascending: true)
