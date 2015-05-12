@@ -27,8 +27,8 @@ class ViewController: UIViewController {
     
     let cellIdentifier = "DoodleCell"
     
-    lazy var layout: DDCollectionViewFlowLayout = {
-        let layout = DDCollectionViewFlowLayout()
+    lazy var layout: DDHangingPhotoLayout = {
+        let layout = DDHangingPhotoLayout()
         return layout
     }()
     
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 14
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

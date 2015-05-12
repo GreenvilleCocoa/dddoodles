@@ -18,7 +18,7 @@
 		459DF8D11B026CE900004DC4 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8CF1B026CE900004DC4 /* Artist.swift */; };
 		459DF8D21B026CE900004DC4 /* Doodle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8D01B026CE900004DC4 /* Doodle.swift */; };
 		459DF8D41B026CF800004DC4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8D31B026CF800004DC4 /* CoreDataStack.swift */; };
-		EF390FCC1B02697500206993 /* DDCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */; };
+		E75A19B21B02BAE80085E972 /* DDHangingPhotoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75A19B11B02BAE80085E972 /* DDHangingPhotoLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 		459DF8CF1B026CE900004DC4 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		459DF8D01B026CE900004DC4 /* Doodle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Doodle.swift; sourceTree = "<group>"; };
 		459DF8D31B026CF800004DC4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		E75A19B11B02BAE80085E972 /* DDHangingPhotoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDHangingPhotoLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 				459DF8CD1B026CC800004DC4 /* CoreData */,
 				459DF89F1B0266E100004DC4 /* AppDelegate.swift */,
 				459DF8A41B0266E100004DC4 /* ViewController.swift */,
-				EF390FCA1B02694D00206993 /* CollectionView */,
+				E75A19B11B02BAE80085E972 /* DDHangingPhotoLayout.swift */,
 				459DF8A91B0266E100004DC4 /* Images.xcassets */,
 				459DF8AB1B0266E100004DC4 /* LaunchScreen.xib */,
 				459DF89D1B0266E100004DC4 /* Supporting Files */,
@@ -144,14 +144,6 @@
 				4557F0BE1B029C5300A84887 /* DoodleExtension.swift */,
 			);
 			name = ManagedObjects;
-			sourceTree = "<group>";
-		};
-		EF390FCA1B02694D00206993 /* CollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */,
-			);
-			name = CollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,9 +245,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4557F0BF1B029C5300A84887 /* DoodleExtension.swift in Sources */,
+				E75A19B21B02BAE80085E972 /* DDHangingPhotoLayout.swift in Sources */,
 				459DF8D41B026CF800004DC4 /* CoreDataStack.swift in Sources */,
 				459DF8D21B026CE900004DC4 /* Doodle.swift in Sources */,
-				EF390FCC1B02697500206993 /* DDCollectionViewFlowLayout.swift in Sources */,
 				459DF8A51B0266E100004DC4 /* ViewController.swift in Sources */,
 				4557F0BC1B029C1C00A84887 /* ArtistExtension.swift in Sources */,
 				459DF8A31B0266E100004DC4 /* Doodles.xcdatamodeld in Sources */,
