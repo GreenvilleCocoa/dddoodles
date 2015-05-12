@@ -13,6 +13,7 @@
 		459DF8AA1B0266E100004DC4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459DF8A91B0266E100004DC4 /* Images.xcassets */; };
 		459DF8AD1B0266E100004DC4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459DF8AB1B0266E100004DC4 /* LaunchScreen.xib */; };
 		459DF8B91B0266E100004DC4 /* DoodlesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8B81B0266E100004DC4 /* DoodlesTests.swift */; };
+		EF390FCC1B02697500206993 /* DDCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		459DF8B21B0266E100004DC4 /* DoodlesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoodlesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		459DF8B71B0266E100004DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		459DF8B81B0266E100004DC4 /* DoodlesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodlesTests.swift; sourceTree = "<group>"; };
+		EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				459DF89F1B0266E100004DC4 /* AppDelegate.swift */,
 				459DF8A41B0266E100004DC4 /* ViewController.swift */,
+				EF390FCA1B02694D00206993 /* CollectionView */,
 				459DF8A91B0266E100004DC4 /* Images.xcassets */,
 				459DF8AB1B0266E100004DC4 /* LaunchScreen.xib */,
 				459DF8A11B0266E100004DC4 /* Doodles.xcdatamodeld */,
@@ -110,6 +113,14 @@
 				459DF8B71B0266E100004DC4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF390FCA1B02694D00206993 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				EF390FCB1B02697500206993 /* DDCollectionViewFlowLayout.swift */,
+			);
+			name = CollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF390FCC1B02697500206993 /* DDCollectionViewFlowLayout.swift in Sources */,
 				459DF8A51B0266E100004DC4 /* ViewController.swift in Sources */,
 				459DF8A31B0266E100004DC4 /* Doodles.xcdatamodeld in Sources */,
 				459DF8A01B0266E100004DC4 /* AppDelegate.swift in Sources */,
@@ -402,6 +414,7 @@
 				459DF8BE1B0266E100004DC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		459DF8BF1B0266E100004DC4 /* Build configuration list for PBXNativeTarget "DoodlesTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +423,7 @@
 				459DF8C11B0266E100004DC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

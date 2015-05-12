@@ -12,15 +12,61 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.redColor()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        view.addSubview(collectionView)
+        
+        let views = ["collection": collectionView]
+        
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[collection]|", options: nil, metrics: nil, views: views))
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[collection]|", options: nil, metrics: nil, views: views))
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
+    //==========================================================================
+    // Mark: UICollectionView
+    //==========================================================================
+    
+    let cellIdentifier = "DoodleCell"
+    
+    lazy var layout: DDCollectionViewFlowLayout = {
+        let layout = DDCollectionViewFlowLayout()
+        return layout
+    }()
+    
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
+        collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        collectionView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellIdentifier)
+        
+        return collectionView
+    }()
 }
 
+extension ViewController: UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        
+        
+        
+        return cell
+    }
+    
+}
+
+extension ViewController: UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        println("Tapped \(indexPath)")
+    }
+    
+}
