@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4557F0BC1B029C1C00A84887 /* ArtistExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557F0BB1B029C1C00A84887 /* ArtistExtension.swift */; };
 		4557F0BF1B029C5300A84887 /* DoodleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557F0BE1B029C5300A84887 /* DoodleExtension.swift */; };
+		456AF0E61B02BC6C002EBBEF /* DoodleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AF0E51B02BC6C002EBBEF /* DoodleCollectionViewCell.swift */; };
 		459DF8A01B0266E100004DC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF89F1B0266E100004DC4 /* AppDelegate.swift */; };
 		459DF8A31B0266E100004DC4 /* Doodles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8A11B0266E100004DC4 /* Doodles.xcdatamodeld */; };
 		459DF8A51B0266E100004DC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DF8A41B0266E100004DC4 /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		4557F0BB1B029C1C00A84887 /* ArtistExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistExtension.swift; sourceTree = "<group>"; };
 		4557F0BE1B029C5300A84887 /* DoodleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoodleExtension.swift; sourceTree = "<group>"; };
+		456AF0E51B02BC6C002EBBEF /* DoodleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoodleCollectionViewCell.swift; sourceTree = "<group>"; };
 		459DF89A1B0266E100004DC4 /* Doodles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Doodles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459DF89E1B0266E100004DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		459DF89F1B0266E100004DC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				459DF89F1B0266E100004DC4 /* AppDelegate.swift */,
 				459DF8A41B0266E100004DC4 /* ViewController.swift */,
 				E75A19B11B02BAE80085E972 /* DDHangingPhotoLayout.swift */,
+				456AF0E51B02BC6C002EBBEF /* DoodleCollectionViewCell.swift */,
 				459DF8A91B0266E100004DC4 /* Images.xcassets */,
 				459DF8AB1B0266E100004DC4 /* LaunchScreen.xib */,
 				459DF89D1B0266E100004DC4 /* Supporting Files */,
@@ -253,6 +256,7 @@
 				459DF8A31B0266E100004DC4 /* Doodles.xcdatamodeld in Sources */,
 				459DF8D11B026CE900004DC4 /* Artist.swift in Sources */,
 				459DF8A01B0266E100004DC4 /* AppDelegate.swift in Sources */,
+				456AF0E61B02BC6C002EBBEF /* DoodleCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
