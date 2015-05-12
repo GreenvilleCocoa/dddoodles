@@ -55,6 +55,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(self.lastnameField)
         view.addSubview(self.doodleNameField)
         
+        self.doodleImageView.hidden = true
+        
         self.setupViews()
         
         let views = ["collection": collectionView]
@@ -62,8 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[collection]|", options: nil, metrics: nil, views: views))
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[collection]|", options: nil, metrics: nil, views: views))
         
-        data = Doodle.allDoodles()
-        collectionView.reloadData()
+        self.fetchData()
     }
     
     func setupViews()
@@ -119,13 +120,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var svc = SignatureViewController()
         
         svc.completion = { (signature: Signature!) -> Void in
-            
+
             if (signature != nil) {
-                var image = signature.imageWithSize(CGSize(width: self.doodleImageView.frame.size.width - 10.0, height: self.doodleImageView.frame.size.height - 10.0), color: UIColor.orangeColor())
-                self.doodleImageView.image = image
+                var image = signature.imageWithSize(CGSize(width: self.doodleImageView.frame.size.width - 10.0, height: self.doodleImageView.frame.size.height - 10.0), color: UIColor.blackColor())
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    let doodle = Doodle.newDoodle()
+                    
+                    let imageData = UIImagePNGRepresentation(image)
+                    doodle.image = imageData
+                    
+                    CoreDataStack.sharedInstance.saveContext()
+                })
+                
             }
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.fetchData()
+            })
         }
         
         let nav = UINavigationController(rootViewController: svc)
@@ -141,7 +153,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //==========================================================================
+    // MARK: Data
+    //==========================================================================
  
+    func fetchData() {
+        data = Doodle.allDoodles()
+        collectionView.reloadData()
+    }
+    
     //==========================================================================
     // Mark: UICollectionView
     //==========================================================================
@@ -180,9 +201,10 @@ extension ViewController: UICollectionViewDataSource {
         let doodle = data[indexPath.row]
         
         let imageData = doodle.image
-        let image = UIImage(data: imageData)!
         
-        cell.doodleImageView.image = image
+        if let image = UIImage(data: imageData) {
+            cell.doodleImageView.image = image
+        }
         
         return cell
     }

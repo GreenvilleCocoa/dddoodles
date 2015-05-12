@@ -10,6 +10,7 @@ import UIKit
 
 class DoodleCollectionViewCell: UICollectionViewCell {
     var frameImageView: UIImageView
+    var frameBackgroundView: UIView
     var doodleImageView: UIImageView
     
     override init(frame: CGRect) {
@@ -18,10 +19,14 @@ class DoodleCollectionViewCell: UICollectionViewCell {
         
         self.doodleImageView = UIImageView()
         self.doodleImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.doodleImageView.backgroundColor = UIColor.blueColor()
+        
+        self.frameBackgroundView = UIImageView()
+        self.frameBackgroundView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.frameBackgroundView.backgroundColor = UIColor.whiteColor()
         
         super.init(frame: frame)
         
+        self.contentView.addSubview(self.frameBackgroundView)
         self.contentView.addSubview(self.doodleImageView)
         self.contentView.addSubview(self.frameImageView)
         
@@ -31,10 +36,16 @@ class DoodleCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[frame]|", options: nil, metrics: nil, views: views))
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[frame]|", options: nil, metrics: nil, views: views))
+        
+        NSLayoutConstraint(item: self.frameBackgroundView, attribute: .CenterX, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterX, multiplier: 1.0, constant: 0.0).active = true
+        NSLayoutConstraint(item: self.frameBackgroundView, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0).active = true
+        NSLayoutConstraint(item: self.frameBackgroundView, attribute: .Width, relatedBy: .Equal, toItem: self.contentView, attribute: .Width, multiplier: 0.90, constant: 0.0).active = true
+        NSLayoutConstraint(item: self.frameBackgroundView, attribute: .Height, relatedBy: .Equal, toItem: self.contentView, attribute: .Height, multiplier: 0.90, constant: 0.0).active = true
+        
         NSLayoutConstraint(item: self.doodleImageView, attribute: .CenterX, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterX, multiplier: 1.0, constant: 0.0).active = true
         NSLayoutConstraint(item: self.doodleImageView, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0).active = true
-        NSLayoutConstraint(item: self.doodleImageView, attribute: .Width, relatedBy: .Equal, toItem: self.contentView, attribute: .Width, multiplier: 0.90, constant: 0.0).active = true
-        NSLayoutConstraint(item: self.doodleImageView, attribute: .Height, relatedBy: .Equal, toItem: self.contentView, attribute: .Height, multiplier: 0.90, constant: 0.0).active = true
+        NSLayoutConstraint(item: self.doodleImageView, attribute: .Width, relatedBy: .Equal, toItem: self.contentView, attribute: .Width, multiplier: 0.60, constant: 0.0).active = true
+        NSLayoutConstraint(item: self.doodleImageView, attribute: .Height, relatedBy: .Equal, toItem: self.contentView, attribute: .Height, multiplier: 0.60, constant: 0.0).active = true
     }
 
     required init(coder aDecoder: NSCoder) {
