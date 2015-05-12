@@ -10,34 +10,60 @@ import UIKit
 
 class DDHangingPhotoLayout: UICollectionViewLayout {
     
-    private let decorationStringKind = "decorationStringKind"
+    // =========================================================================
+    // MARK: - Public Properties
+    // =========================================================================
+    
+    var minimumItemSize = CGSize(width: 100, height: 100)
+    var maximumItemSize = CGSize(width: 200, height: 200)
+    
+    var minimumInterItemSpacing = CGFloat(16.0)
+    
+    var sectionInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+    
+    var itemsPerColumn: CGFloat {
+        return collectionHeight / (maximumItemSize.height + minimumInterItemSpacing)
+    }
+    
+    // =========================================================================
+    // MARK: - Private Properties
+    // =========================================================================
+    
+    private let DDDecorationStringKind = "DDDecorationStringKind"
     
     private var attributes: [UICollectionViewLayoutAttributes] = []
-    private var itemAttributes: [UICollectionViewLayoutAttributes] = []
-    
-    var interItemSpacing = CGFloat(16.0)
-    var itemsPerColumn = CGFloat(3.0)
+    private var itemAttributes: [UICollectionViewLayoutAttributes] {
+        return attributes.filter { (attribute: UICollectionViewLayoutAttributes) -> Bool in
+            return attribute.representedElementCategory == .Cell
+        }
+    }
     
     private var collectionHeight: CGFloat {
         return collectionView?.frame.height ?? 0.0
     }
     
-    private var itemHeight: CGFloat {
-        return collectionHeight / (itemsPerColumn + 1)
-    }
-    
-    private var itemWidth: CGFloat {
-        return CGFloat(100.0)
-    }
+    // =========================================================================
+    // MARK: - Lifecycle
+    // =========================================================================
     
     override init() {
         super.init()
         
-        registerClass(DDHangingPhotoStringView.self, forDecorationViewOfKind: decorationStringKind)
+        registerClass(DDHangingPhotoStringView.self, forDecorationViewOfKind: DDDecorationStringKind)
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    // =========================================================================
+    // MARK: - UICollectionViewLayout
+    // =========================================================================
+    
+    override func invalidateLayout() {
+        super.invalidateLayout()
+        
+        attributes = []
     }
     
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
@@ -54,21 +80,25 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
                 let indexPath = NSIndexPath(forItem: item, inSection: section)
                 
                 let itemAttribute = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
-                let decorationAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: decorationStringKind, withIndexPath: indexPath)
+                let decorationAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: DDDecorationStringKind, withIndexPath: indexPath)
                 
-                let itemStartX = floor(CGFloat(item) / itemsPerColumn) * (itemWidth + interItemSpacing)
-                let itemStartY = floor(CGFloat(item) % itemsPerColumn) * (itemHeight + interItemSpacing)
+                let itemStartX = floor(CGFloat(item) / itemsPerColumn) * (maximumItemSize.width + minimumInterItemSpacing) + sectionInsets.left
+                let itemStartY = floor(CGFloat(item) % itemsPerColumn) * (maximumItemSize.height + minimumInterItemSpacing) + sectionInsets.top
                 
-                itemAttribute.frame = CGRect(x: itemStartX, y: itemStartY, width: itemWidth, height: itemHeight)
+                println("\(floor(CGFloat(item) % itemsPerColumn))")
                 
+                itemAttribute.frame = CGRect(x: itemStartX, y: itemStartY, width: maximumItemSize.width, height: maximumItemSize.height)
+                itemAttribute.zIndex = 1000
+                
+                
+                // Create Decoration Attributes
                 let decorationStartY = CGRectGetMidY(itemAttribute.frame) - collectionHeight
                 
                 decorationAttribute.frame = CGRect(x: CGRectGetMidX(itemAttribute.frame), y: decorationStartY, width: 2.0, height: collectionHeight)
-                
+                decorationAttribute.zIndex = 0
                 
                 attributes.append(itemAttribute)
-                itemAttributes.append(itemAttribute)
-//                attributes.append(decorationAttribute)
+                attributes.append(decorationAttribute)
             }
         }
     }
@@ -81,7 +111,10 @@ class DDHangingPhotoLayout: UICollectionViewLayout {
     }
     
     override func collectionViewContentSize() -> CGSize {
-        return CGSize(width: CGFloat(itemAttributes.count / 3) * itemWidth, height: collectionHeight)
+        let sectionInsetsAdjustment = sectionInsets.left + sectionInsets.right
+        let fullItemWidth = maximumItemSize.height + minimumInterItemSpacing;
+        
+        return CGSize(width: ceil(CGFloat(itemAttributes.count) / itemsPerColumn) * fullItemWidth + sectionInsetsAdjustment, height: collectionHeight)
     }
 }
 
